@@ -204,6 +204,84 @@
       }
 
     }
+    
+    class GraficoMondo {
+      datiGrezzi;
+      datiElaborati;
+
+      chart;
+      options;
+      data;
+
+      constructor(dati) {
+        this.datiGrezzi = dati;
+        this.datiElaborati = [];
+
+        this.elaboraDati();
+        this.caricaData();
+
+        this.options = {
+          colorAxis: {minValue: 0, colors: '#FF0000'},
+        };
+
+        this.chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+        this.chart.draw(this.data, this.options);
+      }
+
+      esiste(dato) {
+        let presente = false;
+        for (let i = 0; i < this.datiElaborati.length; i++) {
+          if (this.datiElaborati[i][0] == dato[0]) {
+            presente = true;
+            break;
+          }
+        }
+
+        return presente;
+      }
+
+      caricaData() {
+        this.data = new google.visualization.DataTable();
+        this.data.addColumn('string', 'Stato');
+        this.data.addColumn('number', 'Guerra');
+        this.data.addColumn({type:'string', role:'tooltip'}, 'Note');
+        
+        this.data.addRows(this.datiElaborati);
+      }
+
+      elaboraDati() {
+        for (let i = 0; i < this.datiGrezzi.length; i++) {
+          if (this.esiste(this.datiGrezzi[i])) continue;
+
+          let stessoStato = [];
+          for (let j = 0; j < this.datiGrezzi.length; j++)  {
+            if (this.datiGrezzi[j][0] == this.datiGrezzi[i][0]) stessoStato.push(j);
+          }
+          stessoStato.sort((a, b) => this.datiGrezzi[b][1][1] - this.datiGrezzi[a][1][1]);
+
+          let dato = [];
+          dato.push(this.datiGrezzi[i][0]);
+          dato.push(this.datiGrezzi[stessoStato[0]][1][1]);
+
+          let nota = "";
+          for (let j = 0; j < stessoStato.length; j++) {
+            if (j != 0) nota += "\n";
+            if (this.datiGrezzi[stessoStato[j]][1][1] == 2025) {
+              nota += `(${this.datiGrezzi[stessoStato[j]][1][0]} - ${this.datiGrezzi[stessoStato[j]][1][1]}) Attualmente in corso - ${this.datiGrezzi[stessoStato[j]][2]}`;
+            }
+            else {
+              nota += `(${this.datiGrezzi[stessoStato[j]][1][0]} - ${this.datiGrezzi[stessoStato[j]][1][1]}) Finita - ${this.datiGrezzi[stessoStato[j]][2]}`;
+            } 
+          };
+          dato.push(nota);
+
+          this.datiElaborati.push(dato);
+        };
+      }
+
+    }
+
     const contenitore = document.getElementById("contenitoreCarousel");
     const btnPrec = document.getElementById("prec");
     const btnSuc = document.getElementById("succ");
@@ -229,104 +307,39 @@
       gestore.clickSuccessivo();
     });
 
+
+    let dati = [
+      // In corso
+      ['Russia', [2014, 2025], "in guerra con l'Ucraina"],
+      ['Ukraine', [2014, 2025], "in guerra con la Russia"],
+      ['Israel', [2023, 2025], "in guerra con la Palestina"],
+      ['Palestine', [2023, 2025], "in guerra con Israele"],
+      ['Sudan', [2023, 2025], "in una guerra civile"],
+      ['Myanmar', [2021, 2025], "in una guerra civile"],
+      ['Yemen', [2015, 2025], "in stato d'emergenza a causa della violenza di gang"],
+      ['Somalia', [1991, 2025], "in una guerra civile"],
+      ['CD', [2022, 2025], "in una guerra civile"], // Congo
+
+      // Finite
+      ['US', [2001, 2021], "guerra con l'Afghanistan"],
+      ['Afghanistan', [2001, 2021], "guerra con gli Stati Uniti"],
+      ['Iraq', [2003, 2011], "guerra con gli Stati Uniti"],
+      ['Sudan', [2003, 2020], "guerra civile"],
+      ['Mexico', [2004, 2010], "guerra tra gang"],
+      ['Central African Republic', [2004, 2007], "guerra civile"],
+      ['Chad', [2005, 2010], "guerra civile"],
+      ['Kenya', [2005, 2008], "guerra civile"],
+      ['Sri Lanka', [2006, 2009], "guerra civile"],
+      ['Libya', [2011, 2011], "guerra civile"],
+      ['', [], ""],
+    ];
+
     google.charts.load('current', {
         'packages':['geochart'],
-      });
-      google.charts.setOnLoadCallback(drawRegionsMap);
-
-      function drawRegionsMap() {
-        /**
-         * 100 = Attualmente in corso
-         * 90 = ultimi 10 anni
-         * 80 = ultimi 20 anni
-         * 70 = ultimi 30 anni
-         * 
-        */
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Stato');
-        data.addColumn('number', 'Guerra');
-        data.addColumn({type:'string', role:'tooltip'}, 'Note');
-        
-        let dati = [
-          // In corso
-          ['Russia', [2014, 2025], "in guerra con l'Ucraina"],
-          ['Ukraine', [2014, 2025], "in guerra con la Russia"],
-          ['Israel', [2023, 2025], "in guerra con la Palestina"],
-          ['Palestine', [2023, 2025], "in guerra con Israele"],
-          ['Sudan', [2023, 2025], "in una guerra civile"],
-          ['Myanmar', [2021, 2025], "in una guerra civile"],
-          ['Yemen', [2015, 2025], "in stato d'emergenza a causa della violenza di gang"],
-          ['Somalia', [1991, 2025], "in una guerra civile"],
-          ['CD', [2022, 2025], "in una guerra civile"], // Congo
-
-          // Finite
-          ['US', [2001, 2021], "guerra con l'Afghanistan"],
-          ['Afghanistan', [2001, 2021], "guerra con gli Stati Uniti"],
-          ['Iraq', [2003, 2011], "guerra con gli Stati Uniti"],
-          ['Sudan', [2003, 2020], "guerra civile"],
-          ['Mexico', [2004, 2010], "guerra tra gang"],
-          ['Central African Republic', [2004, 2007], "guerra civile"],
-          ['Chad', [2005, 2010], "guerra civile"],
-          ['Kenya', [2005, 2008], "guerra civile"],
-          ['Sri Lanka', [2006, 2009], "guerra civile"],
-          ['Libya', [2011, 2011], "guerra civile"],
-          ['', [], ""],
-        ];
-
-        let caricati = []
-        for(let i = 0; i < dati.length; i++) {
-          let presente = false;
-          for (let j = 0; j < caricati.length; j++) {
-            if (caricati[j][0] == dati[i][0]) {
-              presente = true;
-              break;
-            }
-          }
-          if (presente) continue;
-
-          let doppioni = [];
-          doppioni.push(i);
-          
-          for(let j = 0; j<dati.length; j++)  {
-            if (i == j || doppioni.includes(j)) continue;
-            if (dati[j][0] == dati[i][0]) doppioni.push(j);
-          }
-
-          if (doppioni.length > 0) {
-            console.log(doppioni);
-            doppioni.sort((a, b) => dati[b][1][1] - dati[a][1][1]);
-            console.log(doppioni);
-          }
-
-          let dato = [];
-          dato.push(dati[i][0]);
-          dato.push(dati[doppioni[0]][1][1]);
-
-          let nota = "";
-          for (let j = 0; j < doppioni.length; j++) {
-            if (j != 0) nota += "\n";
-            if (dati[doppioni[j]][1][1] == 2025) {
-              nota += `(${dati[doppioni[j]][1][0]} - ${dati[doppioni[j]][1][1]}) Attualmente in corso - ${dati[doppioni[j]][2]}`;
-            }
-            else {
-              nota += `(${dati[doppioni[j]][1][0]} - ${dati[doppioni[j]][1][1]}) Finita - ${dati[doppioni[j]][2]}`;
-            } 
-          };
-          dato.push(nota);
-
-          caricati.push(dato);
-        };
-
-        data.addRows(caricati);
-
-        var options = {
-          colorAxis: {minValue: 0, colors: '#FF0000'},
-        };
-
-        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
-
-        chart.draw(data, options);
-      }
+    });
+    google.charts.setOnLoadCallback(() => {
+      const mondo = new GraficoMondo(dati);
+    });
 
     // Validazione login
     // salvataggio su json
