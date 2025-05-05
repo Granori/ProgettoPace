@@ -242,18 +242,6 @@
          * 70 = ultimi 30 anni
          * 
         */
-        // var data = google.visualization.arrayToDataTable([
-        //   ['Stato', 'Guerra'],
-        //   ['Russia', 100],
-        //   ['Ukraine', 100],
-        //   ['Israel', 100],
-        //   ['Palestine', 100],
-        //   ['Sudan', 100],
-        //   ['Myanmar', 100],
-        //   ['Yemen', 100],
-        //   ['Somalia', 100],
-        //   ['CD', 100], // Congo
-        // ]);
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Stato');
         data.addColumn('number', 'Guerra');
@@ -275,7 +263,7 @@
           ['US', [2001, 2021], "guerra con l'Afghanistan"],
           ['Afghanistan', [2001, 2021], "guerra con gli Stati Uniti"],
           ['Iraq', [2003, 2011], "guerra con gli Stati Uniti"],
-          ['Sudan', [2003, 2020], ""],
+          ['Sudan', [2003, 2020], "guerra civile"],
           ['Mexico', [2004, 2010], "guerra tra gang"],
           ['Central African Republic', [2004, 2007], "guerra civile"],
           ['Chad', [2005, 2010], "guerra civile"],
@@ -284,8 +272,18 @@
           ['Libya', [2011, 2011], "guerra civile"],
           ['', [], ""],
         ];
-        let indici = []
-        for(let i = 0; i<dati.length; i++) {
+
+        let caricati = []
+        for(let i = 0; i < dati.length; i++) {
+          let presente = false;
+          for (let j = 0; j < caricati.length; j++) {
+            if (caricati[j][0] == dati[i][0]) {
+              presente = true;
+              break;
+            }
+          }
+          if (presente) continue;
+
           let doppioni = [];
           doppioni.push(i);
           
@@ -293,20 +291,33 @@
             if (i == j || doppioni.includes(j)) continue;
             if (dati[j][0] == dati[i][0]) doppioni.push(j);
           }
-          indici.push(doppioni);
-          console.log(doppioni);
 
-          // fare in modo che il for salti i doppioni guardando l'indice
+          if (doppioni.length > 0) {
+            console.log(doppioni);
+            doppioni.sort((a, b) => dati[b][1][1] - dati[a][1][1]);
+            console.log(doppioni);
+          }
 
-          // if (dato[1][1] == 2025) {
-          //   dato[2] = `(${dato[1][0]} - ${dato[1][1]}) Attualmente in corso - ${dato[2]}`;
-          // }
-          // else dato[2] = `(${dato[1][0]} - ${dato[1][1]}) Finita - ${dato[2]}`;
+          let dato = [];
+          dato.push(dati[i][0]);
+          dato.push(dati[doppioni[0]][1][1]);
 
-          // dato[1] = dato[1][1];
+          let nota = "";
+          for (let j = 0; j < doppioni.length; j++) {
+            if (j != 0) nota += "\n";
+            if (dati[doppioni[j]][1][1] == 2025) {
+              nota += `(${dati[doppioni[j]][1][0]} - ${dati[doppioni[j]][1][1]}) Attualmente in corso - ${dati[doppioni[j]][2]}`;
+            }
+            else {
+              nota += `(${dati[doppioni[j]][1][0]} - ${dati[doppioni[j]][1][1]}) Finita - ${dati[doppioni[j]][2]}`;
+            } 
+          };
+          dato.push(nota);
+
+          caricati.push(dato);
         };
 
-        data.addRows(dati);
+        data.addRows(caricati);
 
         var options = {
           colorAxis: {minValue: 0, colors: '#FF0000'},
