@@ -34,11 +34,31 @@
             <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
             <li><a href="#" class="nav-link px-2 text-white">About</a></li>
           </ul>
-  
-          <div class="text-end">
-            <button type="button" class="btn btn-outline-light me-2">Login</button>
+
+
+          <div class="text-end position-relative">
+            <button type="button" class="btn btn-outline-light me-2" id="loginToggle">Login</button>
             <button type="button" class="btn btn-warning">Sign-up</button>
+
+            <div id="loginForm" class="card p-3 position-absolute end-0 mt-2" style="width: 18rem; display: none; z-index: 1000;">
+              <form onsubmit="failogin(event)" name="login" novalidate>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="Mario.Rossi@gmail.com">
+                  <p id="errorEmail" class="text-danger" style="display: none">Email non registrata</p>
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" placeholder="Password">
+                  <p id="errorPassword" class="text-danger" style="display: none">Password errata</p>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+              </form>
+            </div>
           </div>
+
+
+
         </div>
       </div>
     </header>
@@ -342,6 +362,36 @@
     });
 
     // Validazione login
+    const toggleBtn = document.getElementById('loginToggle');
+    const loginForm = document.getElementById('loginForm');
+
+    toggleBtn.addEventListener('click', () => {
+      loginForm.style.display = loginForm.style.display === 'none' ? 'block' : 'none';
+    });
+    //messaggi errore
+    function failogin(event)
+    { event.preventDefault();
+      let emailCorretta = "Mario.Rossi@gmail.com";
+      let passwordCorretta = "admin";
+
+      let emailData = document.login.email.value;
+      let passwordData= document.login.password.value;
+      
+      let errorEmail = document.getElementById("errorEmail");
+      let errorPassword = document.getElementById("errorPassword");
+
+      if(emailData !== emailCorretta)
+        errorEmail.style.display = "block";
+      if(passwordData !== passwordCorretta)
+        errorPassword.style.display = "block";
+
+    }
+    //chiude cliccando fuori
+    document.addEventListener('click', (e) => {
+      if (!loginForm.contains(e.target) && e.target !== toggleBtn) {
+        loginForm.style.display = 'none';
+      }
+    });
     // salvataggio su json
 
   </script>
