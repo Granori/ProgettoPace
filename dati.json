@@ -1,0 +1,152 @@
+[
+  {
+    "stato": "Russia",
+    "anni": [2014, 2025],
+    "descrizione": "in guerra con l'Ucraina"
+  },
+  {
+    "stato": "Ukraine",
+    "anni": [2014, 2025],
+    "descrizione": "in guerra con la Russia"
+  },
+  {
+    "stato": "Israel",
+    "anni": [2023, 2025],
+    "descrizione": "in guerra con la Palestina"
+  },
+  {
+    "stato": "Palestine",
+    "anni": [2023, 2025],
+    "descrizione": "in guerra con Israele"
+  },
+  {
+    "stato": "Sudan",
+    "anni": [2023, 2025],
+    "descrizione": "in una guerra civile tra fazioni militari"
+  },
+  {
+    "stato": "Myanmar",
+    "anni": [2021, 2025],
+    "descrizione": "in una guerra civile"
+  },
+  {
+    "stato": "Yemen",
+    "anni": [2015, 2025],
+    "descrizione": "in stato d'emergenza a causa della violenza di gang"
+  },
+  {
+    "stato": "CD",
+    "anni": [2022, 2025],
+    "descrizione": "in una guerra civile"
+  },
+  {
+    "stato": "US",
+    "anni": [2003, 2011],
+    "descrizione": "Guerra con l'Iraq"
+  },
+  {
+    "stato": "Iraq",
+    "anni": [2003, 2011],
+    "descrizione": "Guerra con gli Stati Uniti"
+  },
+  {
+    "stato": "US",
+    "anni": [2014, 2017],
+    "descrizione": "Guerra contro un gruppo terroristico in Iraq"
+  },
+  {
+    "stato": "Iraq",
+    "anni": [2014, 2017],
+    "descrizione": "Guerra civile contro un gruppo terroristico"
+  },
+  {
+    "stato": "Iraq",
+    "anni": [2006, 2008],
+    "descrizione": "Guerra civile irachena"
+  },
+  {
+    "stato": "Somalia",
+    "anni": [1986, 1991],
+    "descrizione": "Guerra civile"
+  },
+  {
+    "stato": "Somalia",
+    "anni": [1991, 2006],
+    "descrizione": "Guerra civile tra signori della guerra"
+  },
+  {
+    "stato": "Somalia",
+    "anni": [2006, 2009],
+    "descrizione": "Guerra civile e intervento dell'Etiopia"
+  },
+  {
+    "stato": "Ethiopia",
+    "anni": [2006, 2009],
+    "descrizione": "Guerra contro un gruppo terroristico in Somalia"
+  },
+  {
+    "stato": "Somalia",
+    "anni": [2009, 2025],
+    "descrizione": "Guerra civile contro un gruppo jihadista"
+  },
+  {
+    "stato": "US",
+    "anni": [2001, 2006],
+    "descrizione": "Guerra in Afghanistan"
+  },
+  {
+    "stato": "Afghanistan",
+    "anni": [2001, 2006],
+    "descrizione": "Intervento militare USA e guerra civile"
+  },
+  {
+    "stato": "Afghanistan",
+    "anni": [2006, 2014],
+    "descrizione": "Insurrezione di un gruppo terroristico e guerra civile"
+  },
+  {
+    "stato": "Afghanistan",
+    "anni": [2014, 2020],
+    "descrizione": "Guerra tra governo afghano e Talebani"
+  },
+  {
+    "stato": "US",
+    "anni": [2014, 2020],
+    "descrizione": "Ritorno in Afghanistan"
+  },
+  {
+    "stato": "Mexico",
+    "anni": [2004, 2010],
+    "descrizione": "Guerra tra gang"
+  },
+  {
+    "stato": "Sudan",
+    "anni": [2003, 2020],
+    "descrizione": "Guerra civile"
+  },
+  {
+    "stato": "Central African Republic",
+    "anni": [2004, 2007],
+    "descrizione": "Guerra civile"
+  },
+  {
+    "stato": "Chad",
+    "anni": [2005, 2010],
+    "descrizione": "Guerra civile"
+  },
+  {
+    "stato": "Kenya",
+    "anni": [2005, 2008],
+    "descrizione": "Guerra civile"
+  },
+  {
+    "stato": "Sri Lanka",
+    "anni": [2006, 2009],
+    "descrizione": "guerra civile"
+  },
+  {
+    "stato": "Libya",
+    "anni": [2011, 2011],
+    "descrizione": "guerra civile"
+  }
+]
