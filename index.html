@@ -30,38 +30,53 @@
           </a>
 
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 ms-4 justify-content-center mb-md-0">
-            <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+            <li><a href="index.html" class="nav-link px-2 text-secondary">Home</a></li>
+            <li><a href="radici-guerra.html" class="nav-link px-2 text-white">Radici Guerra</a></li>
+            <li><a href="riconciliazione.html" class="nav-link px-2 text-white">Riconciliazione</a></li>
+            <li><a href="costo-umano.html" class="nav-link px-2 text-white">Costo Umano</a></li>
+            <li><a href="costruire-pace.html" class="nav-link px-2 text-white">Costruire Pace</a></li>
           </ul>
 
 
           <div class="text-end position-relative">
             <button type="button" class="btn btn-outline-light me-2" id="loginToggle">Login</button>
-            <button type="button" class="btn btn-warning">Sign-up</button>
+            <button type="button" class="btn btn-warning" id="signupBtn">Sign-up</button>
 
             <div id="loginForm" class="card p-3 position-absolute end-0 mt-2"
               style="width: 18rem; display: none; z-index: 1000;">
-              <form onsubmit="failogin(event)" name="login" novalidate>
+              <form id="formLogin"name="login" novalidate>
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
                   <input type="email" class="form-control" id="email" placeholder="Mario.Rossi@gmail.com">
-                  <p id="errorEmail" class="text-danger" style="display: none">Email non registrata</p>
                 </div>
                 <div class="mb-3">
                   <label for="password" class="form-label">Password</label>
                   <input type="password" class="form-control" id="password" placeholder="Password">
-                  <p id="errorPassword" class="text-danger" style="display: none">Password errata</p>
                 </div>
+                <p id="erroreLogin" class="text-danger mt-2" style="display: none;">Email o password errati.</p>
                 <button type="submit" class="btn btn-primary w-100">Login</button>
               </form>
             </div>
+          <div id="signupForm" class="card p-3 position-absolute end-0 mt-2" style="width: 18rem; display: none; z-index: 1000;">
+              <form id="formSignup" name="signup" novalidate>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="emailData" placeholder="Mario.Rossi@gmail.com">
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="passwordData" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Sign-up</button>
+              </form>
+          </div>
             <svg id="fotoProfilo" xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-person-circle ms-3 d-none" viewBox="0 0 16 16">
               <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
               <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
             </svg>
+            <div id="schedaProfilo" class="card p-3 position-absolute end-0 mt-2" style="width: 18rem; display: none; z-index: 1000;">
+              <button id="btnLogout" class="btn btn-outline-danger w-100 mt-3">Logout</button>
+            </div>
           </div>
 
 
@@ -143,13 +158,6 @@
   </div>
 
   <footer class="py-3 mt-4 text-bg-dark">
-    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Home</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Features</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Pricing</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-light">FAQs</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-light">About</a></li>
-    </ul>
     <p class="text-center text-light-dark">© 2025 Itis da Vinci, Inc</p>
   </footer>
 

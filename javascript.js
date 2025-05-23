@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Qui il codice per inizializzare la mappa
+    // Classe Carta
     class Carta {
         titolo;
         img;
@@ -11,26 +11,18 @@ document.addEventListener('DOMContentLoaded', function () {
             this.titolo = titolo;
             this.img = img;
             this.testo = testo;
-            this.paginaDettaglio = paginaDettaglio; // Aggiunto parametro per la pagina di destinazione
+            this.paginaDettaglio = paginaDettaglio;
             this.carta = null;
         }
 
         creaCarta(principale) {
-            this.carta = document.createElement("div"); // Cambiato da div ad a
-            // Aggiunto href
-            this.carta.className = "card text-decoration-none";
+            this.carta = document.createElement("div");
+            this.carta.className = "card text-decoration-none w-50";
 
-            const immagine = document.createElement("img");
-            this.carta.className += " w-50";
             if (principale) {
                 this.carta.style = "height: 25em;";
-                immagine.style = "height: 20em; width: 100%";
-
-            }
-            else {
+            } else {
                 this.carta.style = "height: 21em;";
-                immagine.style = "height: 15em; width: 100%";
-
             }
 
             this.carta.addEventListener('click', () => {
@@ -41,8 +33,10 @@ document.addEventListener('DOMContentLoaded', function () {
             const overlayImmagine = document.createElement("div");
             overlayImmagine.className = "position-relative";
 
+            const immagine = document.createElement("img");
             immagine.className = "card-img-top position-relative opacity-50";
             immagine.src = this.img;
+            immagine.style = principale ? "height: 20em; width: 100%" : "height: 15em; width: 100%";
 
             const overlay = document.createElement("div");
             overlay.className = "card-img-overlay position-absolute";
@@ -56,11 +50,10 @@ document.addEventListener('DOMContentLoaded', function () {
             overlayImmagine.appendChild(overlay);
 
             const body = document.createElement("div");
-            body.className = "card-body ";
+            body.className = "card-body";
             const p = document.createElement("p");
             p.className = "card-text";
             p.innerHTML = this.testo;
-
             body.appendChild(p);
 
             this.carta.appendChild(overlayImmagine);
@@ -68,12 +61,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
             return this.carta;
         }
-    };
+    }
 
+    // Classe GestoreCards
     class GestoreCards {
         carte;
         focus;
-        contenitore
+        contenitore;
 
         constructor(contenitore, carte) {
             this.contenitore = contenitore;
@@ -84,30 +78,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         clickPrecedente() {
-            if (this.focus == 0) this.focus = this.carte.length - 1;
-            else this.focus--;
-
+            this.focus = (this.focus === 0) ? this.carte.length - 1 : this.focus - 1;
             this.generaCards();
         }
-        clickSuccessivo() {
-            if (this.focus == this.carte.length - 1) this.focus = 0;
-            else this.focus++;
 
+        clickSuccessivo() {
+            this.focus = (this.focus === this.carte.length - 1) ? 0 : this.focus + 1;
             this.generaCards();
         }
 
         generaCards() {
             this.svuotaContenitore();
             for (let i = -1; i <= 1; i++) {
-                let indice = this.focus + i;
-                if (this.focus + i < 0) indice = this.carte.length - 1;
-                else if (this.focus + i >= this.carte.length) indice = 0;
+                let indice = (this.focus + i + this.carte.length) % this.carte.length;
                 let carta = this.carte[indice];
 
                 let c = new Carta(carta[0], carta[1], carta[2], carta[3]);
-                let cardElement = c.creaCarta(i == 0);
+                let cardElement = c.creaCarta(i === 0);
 
-                // Aggiungi classi di animazione in base alla posizione
                 if (i === -1) {
                     cardElement.classList.add('slide-in-left');
                 } else if (i === 1) {
@@ -123,203 +111,182 @@ document.addEventListener('DOMContentLoaded', function () {
         svuotaContenitore() {
             this.contenitore.innerHTML = "";
         }
-
     }
 
+    // Classe GraficoMondo
     class GraficoMondo {
-      datiGrezzi;
-      datiElaborati;
+        datiGrezzi;
+        datiElaborati;
+        chart;
+        options;
+        data;
 
-      chart;
-      options;
-      data;
+        constructor(dati, options) {
+            this.datiGrezzi = dati;
+            this.datiElaborati = [];
 
-      constructor(dati, options) {
-        this.datiGrezzi = dati;
-        this.datiElaborati = [];
+            this.elaboraDati();
+            this.caricaData();
 
-        this.elaboraDati();
-        this.caricaData();
-
-        this.options = options;
-
-        this.chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
-
-        this.chart.draw(this.data, this.options);
-      }
-
-      esiste(dato) {
-        let presente = false;
-        for (let i = 0; i < this.datiElaborati.length; i++) {
-          if (this.datiElaborati[i][0] == dato[0]) {
-            presente = true;
-            break;
-          }
+            this.options = options;
+            this.chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+            this.chart.draw(this.data, this.options);
         }
 
-        return presente;
-      }
+        esiste(dato) {
+            return this.datiElaborati.some(d => d[0] === dato[0]);
+        }
 
-      caricaData() {
-        this.data = new google.visualization.DataTable();
-        this.data.addColumn('string', 'Stato');
-        this.data.addColumn('number', 'Guerra');
-        this.data.addColumn({type:'string', role:'tooltip'}, 'Note');
+        caricaData() {
+            this.data = new google.visualization.DataTable();
+            this.data.addColumn('string', 'Stato');
+            this.data.addColumn('number', 'Guerra');
+            this.data.addColumn({ type: 'string', role: 'tooltip' }, 'Note');
+            this.data.addRows(this.datiElaborati);
+        }
 
-        this.data.addRows(this.datiElaborati);
-      }
+        elaboraDati() {
+            for (let i = 0; i < this.datiGrezzi.length; i++) {
+                if (this.esiste(this.datiGrezzi[i])) continue;
 
-      elaboraDati() {
-        for (let i = 0; i < this.datiGrezzi.length; i++) {
-          if (this.esiste(this.datiGrezzi[i])) continue;
+                let stessoStato = this.datiGrezzi
+                    .map((val, j) => [j, val])
+                    .filter(([_, val]) => val[0] === this.datiGrezzi[i][0])
+                    .sort((a, b) => b[1][1][1] - a[1][1][1])
+                    .map(([j, _]) => j);
 
-          let stessoStato = [];
-          for (let j = 0; j < this.datiGrezzi.length; j++)  {
-            if (this.datiGrezzi[j][0] == this.datiGrezzi[i][0]) stessoStato.push(j);
-          }
-          stessoStato.sort((a, b) => this.datiGrezzi[b][1][1] - this.datiGrezzi[a][1][1]);
+                let dato = [this.datiGrezzi[i][0], this.datiGrezzi[stessoStato[0]][1][1]];
 
-          let dato = [];
-          dato.push(this.datiGrezzi[i][0]);
-          dato.push(this.datiGrezzi[stessoStato[0]][1][1]);
+                let nota = stessoStato.map(indice => {
+                    const [inizio, fine] = this.datiGrezzi[indice][1];
+                    const desc = this.datiGrezzi[indice][2];
+                    return `(${inizio} - ${fine}) ${fine === 2025 ? "Attualmente in corso" : "Finita"} - ${desc}`;
+                }).join("\n");
 
-          let nota = "";
-          for (let j = 0; j < stessoStato.length; j++) {
-            let indice = stessoStato[j];
-            
-            if (j != 0) nota += "\n";
-            if (this.datiGrezzi[indice][1][1] == 2025) {
-              nota += `(${this.datiGrezzi[indice][1][0]} - ${this.datiGrezzi[indice][1][1]}) Attualmente in corso - ${this.datiGrezzi[indice][2]}`;
+                dato.push(nota);
+                this.datiElaborati.push(dato);
             }
-            else {
-              nota += `(${this.datiGrezzi[indice][1][0]} - ${this.datiGrezzi[indice][1][1]}) Finita - ${this.datiGrezzi[indice][2]}`;
-            } 
-          };
-          dato.push(nota);
-
-          this.datiElaborati.push(dato);
-        };
-      }
-
+        }
     }
 
-
+    // Inizializzazione cards
     const contenitore = document.getElementById("contenitoreCarousel");
     const btnPrec = document.getElementById("prec");
     const btnSuc = document.getElementById("succ");
 
     const carte = [
-        [
-            "./images/le_radici_della_guerra.jpeg",
-            "Le radici della guerra",
-            "Scopri le cause profonde dei conflitti...",
-            "radici-guerra.html"
-        ],
-        [
-            "./images/riconciliazione.jpg",
-            "Storie di guerra e riconciliazione",
-            "Analisi di alcuni dei conflitti...",
-            "riconciliazione.html"
-        ],
-        [
-            "./images/costo-umano.png",
-            "Il costo umano della guerra",
-            "Civili, profughi, bambini...",
-            "costo-umano.html"
-        ],
-        [
-            "./images/costruire-pace.png",
-            "Costruire la pace: modelli e soluzioni",
-            "Mediazione, diplomazia...",
-            "costruire-pace.html"
-        ],
+        ["./images/le_radici_della_guerra.jpeg", "Le radici della guerra", "Scopri le cause profonde dei conflitti...", "radici-guerra.html"],
+        ["./images/riconciliazione.jpg", "Storie di guerra e riconciliazione", "Analisi di alcuni dei conflitti...", "riconciliazione.html"],
+        ["./images/costo-umano.png", "Il costo umano della guerra", "Civili, profughi, bambini...", "costo-umano.html"],
+        ["./images/costruire-pace.png", "Costruire la pace: modelli e soluzioni", "Mediazione, diplomazia...", "costruire-pace.html"]
     ];
+
     const gestore = new GestoreCards(contenitore, carte);
+    btnPrec.addEventListener("click", () => gestore.clickPrecedente());
+    btnSuc.addEventListener("click", () => gestore.clickSuccessivo());
 
-    btnPrec.addEventListener("click", (e) => {
-        const bottone = e.currentTarget;
-        bottone.blur();
-
-        gestore.clickPrecedente();
-    });
-    btnSuc.addEventListener("click", (e) => {
-        const bottone = e.currentTarget;
-        bottone.blur();
-
-        gestore.clickSuccessivo();
-    });
-
+    // Caricamento dati mappa
     let options = {
-      colorAxis: {colors: '#FF0000'},
+        colorAxis: { colors: '#FF0000' },
     };
 
-    let dati = [];
     fetch('./dati.json')
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        dati = Object.keys(data).map(key => {
-            return [data[key].stato, data[key].anni, data[key].descrizione];
-        });
-        console.log(dati)
-        caricamento(dati);
-    })
-    .catch(error => console.error('Errore nel caricare il file JSON:', error));
+        .then(response => response.json())
+        .then(data => {
+            const dati = Object.keys(data).map(key => [data[key].stato, data[key].anni, data[key].descrizione]);
+            google.charts.load('current', { 'packages': ['geochart'] });
+            google.charts.setOnLoadCallback(() => {
+                new GraficoMondo(dati, options);
+            });
+        })
+        .catch(error => console.error('Errore nel caricare il file JSON:', error));
 
-    function caricamento(dati) {
-        google.charts.load('current', {
-            'packages': ['geochart'],
-        });
-        google.charts.setOnLoadCallback(() => {
-            const mondo = new GraficoMondo(dati, options);
-        });
-
-    }
-
-    // Validazione login
-    const toggleBtn = document.getElementById('loginToggle');
+    // Login
+    const loginBtn = document.getElementById('loginToggle');
+    const singupForm = document.getElementById("signupForm");
+    const SignupBtn = document.getElementById("signupBtn");
     const loginForm = document.getElementById('loginForm');
 
-    toggleBtn.addEventListener('click', () => {
+    const loginSubmit = document.getElementById('formLogin');
+    const singupSubmit = document.getElementById('formSignup');
+
+    const errore = document.getElementById('erroreLogin');
+
+    const fotoProfilo = document.getElementById('fotoProfilo');
+    const schedaProfilo = document.getElementById('schedaProfilo');
+    const btnLogout = document.getElementById('btnLogout');
+
+    const listaAccount = [
+        { email: "Mario.Rossi@gmail.com", password: "admin" },
+        { email: "Cloud.Strife@gmail.com", password: "sephiroth" },
+        { email: "giuseppe.verdi@gmail.com", password: "admin2" }
+    ];
+
+    loginBtn.addEventListener('click', () => {
         loginForm.style.display = loginForm.style.display === 'none' ? 'block' : 'none';
     });
 
-    //messaggi errore
-    function failogin(event) {
-        event.preventDefault();
-        let emailCorretta = "Mario.Rossi@gmail.com";
-        let passwordCorretta = "admin";
+    SignupBtn.addEventListener('click', () => {
+        singupForm.style.display = singupForm.style.display === 'none' ? 'block' : 'none';
+    });
 
-        let emailData = document.login.email.value;
-        let passwordData = document.login.password.value;
+    singupSubmit.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('emailData').value;
+        const password = document.getElementById('passwordData').value;
+        listaAccount.push({email, password});
+        singupForm.style.display = 'none';
+    });
 
-        let errorEmail = document.getElementById("errorEmail");
-        let errorPassword = document.getElementById("errorPassword");
+    loginSubmit.addEventListener('submit', (e) => {
+        e.preventDefault();
 
-        if (emailData !== emailCorretta)
-            errorEmail.style.display = "block";
-        if (passwordData !== passwordCorretta)
-            errorPassword.style.display = "block";
+        const email = loginSubmit.elements['email'].value;
+        const password = loginSubmit.elements['password'].value;
 
-    }
-    // quando fai il login/signup devi fare
-    /**
-     * const fotoProfilo = document.getElementById('fotoProfilo');
-     * 
-     * se hai effettuato il login/signup:
-     *      fotoProfilo.className = "bi bi-person-circle ms-3"
-     * 
-     * se hai fatto il logout:
-     *      fotoProfilo.className = "bi bi-person-circle ms-3 d-none"
-     * 
-     * Quando clicchi su fotoProfilo deve comparire una scheda come con il login dove c'è un pulsante per il logout**
-     */
+        const account = listaAccount.find(acc => acc.email === email && acc.password === password);
 
-    //chiude cliccando fuori
+        if (account) {
+            errore.style.display = "none";
+            loginForm.style.display = "none";
+            fotoProfilo.classList.remove('d-none');
+            fotoProfilo.className += "d-block";
+
+            loginBtn.className += " d-none";
+            SignupBtn.className += " d-none";
+        } else {
+            errore.style.display = "block";
+        }
+    });
+
+    // Chiudi il login cliccando fuori
     document.addEventListener('click', (e) => {
-        if (!loginForm.contains(e.target) && e.target !== toggleBtn) {
+        if (!loginForm.contains(e.target) && e.target !== loginBtn) {
             loginForm.style.display = 'none';
         }
     });
-    // salvataggio su json
+
+    document.addEventListener('click', (e) => {
+        if (!loginForm.contains(e.target) && e.target !== SignupBtn) {
+            singupForm.style.display = 'none';
+        }
+    });
+
+    fotoProfilo.addEventListener('click', () => {
+        schedaProfilo.style.display = loginForm.style.display === 'none' ? 'block' : 'none';
+    });
+    document.addEventListener('click', (e) => {
+        if (!fotoProfilo.contains(e.target) && e.target !== fotoProfilo) {
+            schedaProfilo.style.display = 'none';
+        }
+    });
+    fotoProfilo.style.cursor = 'pointer';
+
+    btnLogout.addEventListener('click', () => {
+        loginBtn.classList.remove('d-none');
+        SignupBtn.classList.remove('d-none');
+
+        fotoProfilo.style.display = "none";
+        schedaProfilo.classList += "d-none";
+    });
 });

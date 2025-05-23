@@ -11,93 +11,103 @@
 </head>
 
 <body>
-    <header>
-        <header class="p-3 text-bg-dark fixed-top mb-3">
-            <div class="container">
-                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                    <a href="./index.html"
-                        class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                        <div class="fs-2 mb-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" fill="currentColor"
-                                class="bi bi-peace" viewBox="0 0 16 16">
-                                <path
-                                    d="M7.5 1.018a7 7 0 0 0-4.79 11.566L7.5 7.793zm1 0v6.775l4.79 4.79A7 7 0 0 0 8.5 1.018m4.084 12.273L8.5 9.207v5.775a6.97 6.97 0 0 0 4.084-1.691M7.5 14.982V9.207l-4.084 4.084A6.97 6.97 0 0 0 7.5 14.982M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8">
-                                </path>
-                            </svg>
-                            Pace
-                        </div>
-                    </a>
-
-                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 ms-4 justify-content-center mb-md-0">
-                        <li><a href="./index.html" class="nav-link px-2 text-secondary">Home</a></li>
-                        <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-                        <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-                        <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-                        <li><a href="#" class="nav-link px-2 text-white">About</a></li>
-                    </ul>
-
-
-                    <div class="text-end position-relative">
-                        <button type="button" class="btn btn-outline-light me-2" id="loginToggle">Login</button>
-                        <button type="button" class="btn btn-warning">Sign-up</button>
-
-                        <div id="loginForm" class="card p-3 position-absolute end-0 mt-2"
-                            style="width: 18rem; display: none; z-index: 1000;">
-                            <form onsubmit="failogin(event)" name="login" novalidate>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email"
-                                        placeholder="Mario.Rossi@gmail.com">
-                                    <p id="errorEmail" class="text-danger" style="display: none">Email non registrata
-                                    </p>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password" placeholder="Password">
-                                    <p id="errorPassword" class="text-danger" style="display: none">Password errata</p>
-                                </div>
-                                <button type="submit" class="btn btn-primary w-100">Login</button>
-                            </form>
-                        </div>
+    <header class="p-3 text-bg-dark fixed-top">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="./index.html" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <div class="fs-2 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" fill="currentColor"
+                            class="bi bi-peace" viewBox="0 0 16 16">
+                            <path
+                                d="M7.5 1.018a7 7 0 0 0-4.79 11.566L7.5 7.793zm1 0v6.775l4.79 4.79A7 7 0 0 0 8.5 1.018m4.084 12.273L8.5 9.207v5.775a6.97 6.97 0 0 0 4.084-1.691M7.5 14.982V9.207l-4.084 4.084A6.97 6.97 0 0 0 7.5 14.982M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8">
+                            </path>
+                        </svg>
+                        Pace
                     </div>
-        </header>
+                </a>
 
-        <div class="container my-5">
-            <h1 class="display-3">Le radici della guerra</h1>
-            <img src="./images/riconciliazione.jpg" class="img-fluid mb-4" alt="Le radici della guerra">
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 ms-4 justify-content-center mb-md-0">
+                    <li><a href="index.html" class="nav-link px-2 text-white">Home</a></li>
+                    <li><a href="radici-guerra.html" class="nav-link px-2 text-white">Radici Guerra</a></li>
+                    <li><a href="riconciliazione.html" class="nav-link px-2 text-secondary">Riconciliazione</a></li>
+                    <li><a href="costo-umano.html" class="nav-link px-2 text-white">Costo Umano</a></li>
+                    <li><a href="costruire-pace.html" class="nav-link px-2 text-white">Costruire Pace</a></li>
+                </ul>
 
-            <div class="row">
-                <div class="col-md-8">
-                    <h2>Approfondimento</h2>
-                    <p>Qui puoi inserire il contenuto dettagliato sull'argomento...</p>
-                    <!-- Contenuto esteso -->
+
+                <div class="text-end position-relative">
+                    <button type="button" class="btn btn-outline-light me-2" id="loginToggle">Login</button>
+                    <button type="button" class="btn btn-warning" id="signupBtn">Sign-up</button>
+
+                    <div id="loginForm" class="card p-3 position-absolute end-0 mt-2"
+                        style="width: 18rem; display: none; z-index: 1000;">
+                        <form id="formLogin" name="login" novalidate>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Mario.Rossi@gmail.com">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" placeholder="Password">
+                            </div>
+                            <p id="erroreLogin" class="text-danger mt-2" style="display: none;">Email o password errati.
+                            </p>
+                            <button type="submit" class="btn btn-primary w-100">Login</button>
+                        </form>
+                    </div>
+                    <div id="signupForm" class="card p-3 position-absolute end-0 mt-2"
+                        style="width: 18rem; display: none; z-index: 1000;">
+                        <form id="formSignup" name="signup" novalidate>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="emailData"
+                                    placeholder="Mario.Rossi@gmail.com">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="passwordData" placeholder="Password">
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Sign-up</button>
+                        </form>
+                    </div>
+                    <svg id="fotoProfilo" xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+                        class="bi bi-person-circle ms-3 d-none" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                        <path fill-rule="evenodd"
+                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                    </svg>
                 </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Altri approfondimenti</h5>
-                            <!-- Link ad altre pagine -->
-                        </div>
+    </header>
+
+    <div class="container" style="margin: 7em auto 3em;">
+        <h1 class="display-3">Riconciliazione</h1>
+        <img src="./images/riconciliazione.jpg" class="img-fluid mb-4" alt="Le radici della guerra">
+
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Approfondimento</h2>
+                <p>Qui puoi inserire il contenuto dettagliato sull'argomento...</p>
+                <!-- Contenuto esteso -->
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Altri approfondimenti</h5>
+                        <!-- Link ad altre pagine -->
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <footer class="py-3 mt-4 text-bg-dark">
-            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-                <li class="nav-item"><a href="./index.html" class="nav-link px-2 text-light">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Features</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Pricing</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-light">FAQs</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-light">About</a></li>
-            </ul>
-            <p class="text-center text-light-dark">© 2025 Itis da Vinci, Inc</p>
-        </footer>
+    <footer class="py-3 mt-4 text-bg-dark">
+        <p class="text-center text-light-dark">© 2025 Itis da Vinci, Inc</p>
+    </footer>
 
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
-            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
