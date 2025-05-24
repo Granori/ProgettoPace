@@ -213,6 +213,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const errore = document.getElementById('erroreLogin');
 
     const fotoProfilo = document.getElementById('fotoProfilo');
+    const nomeProfilo = document.getElementById('nome');
     const schedaProfilo = document.getElementById('schedaProfilo');
     const btnLogout = document.getElementById('btnLogout');
 
@@ -249,11 +250,14 @@ document.addEventListener('DOMContentLoaded', function () {
         if (account) {
             errore.style.display = "none";
             loginForm.style.display = "none";
-            fotoProfilo.classList.remove('d-none');
-            fotoProfilo.className += "d-block";
+            fotoProfilo.style.display = "block";
+
+            nomeProfilo.innerHTML = email;
 
             loginBtn.className += " d-none";
             SignupBtn.className += " d-none";
+
+            loginSubmit.value = "";
         } else {
             errore.style.display = "block";
         }
@@ -287,6 +291,6 @@ document.addEventListener('DOMContentLoaded', function () {
         SignupBtn.classList.remove('d-none');
 
         fotoProfilo.style.display = "none";
-        schedaProfilo.classList += "d-none";
+        schedaProfilo.style.display = "none";
     });
 });

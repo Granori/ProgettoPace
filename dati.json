@@ -148,5 +148,15 @@
     "stato": "Libya",
     "anni": [2011, 2011],
     "descrizione": "guerra civile"
+  },
+  {
+    "stato": "India",
+    "anni": [2025, 2025],
+    "descrizione": "guerra con il Pakistan"
+  },
+  {
+    "stato": "Pakistan",
+    "anni": [2025, 2025],
+    "descrizione": "guerra con l'India"
   }
 ]
