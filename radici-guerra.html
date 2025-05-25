@@ -8,9 +8,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <meta charset="UTF-8">
+    <title>Le radici della guerra</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,h2,h3,h4,h5,h6 {
+            font-family: 'Merriweather', serif;
+        }
+    </style>
+
 </head>
 
 <body>
+    <script type="text/javascript" src="javascript.js"></script>
     <header class="p-3 text-bg-dark fixed-top">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -33,7 +58,6 @@
                     <li><a href="costo-umano.html" class="nav-link px-2 text-white">Costo Umano</a></li>
                     <li><a href="costruire-pace.html" class="nav-link px-2 text-white">Costruire Pace</a></li>
                 </ul>
-
 
                 <div class="text-end position-relative">
                     <button type="button" class="btn btn-outline-light me-2" id="loginToggle">Login</button>
@@ -77,34 +101,169 @@
                             d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
                     </svg>
                 </div>
+            </div>
+        </div>
     </header>
 
     <div class="container" style="margin: 7em auto 3em;">
-        <h1 class="display-3">Le radici della guerra</h1>
-        <img src="./images/le_radici_della_guerra.jpeg" class="img-fluid mb-4" alt="Le radici della guerra">
+        <h1 class="display-3 mb-4">Le radici della guerra</h1>
 
-        <div class="row">
+        <div class="row mb-5">
             <div class="col-md-8">
-                <h2>Approfondimento</h2>
-                <p>Qui puoi inserire il contenuto dettagliato sull'argomento...</p>
-                <!-- Contenuto esteso -->
+                <img src="./images/le_radici_della_guerra.jpeg" class="img-fluid rounded mb-4"
+                    alt="Le radici della guerra">
+                <p class="lead">La guerra nasce da tensioni profonde e radicate in storia, economia e cultura. Non
+                    scoppia "in un vuoto": ha dietro disparità sociali, ambizioni politiche e competizione per risorse
+                    scarse.</p>
             </div>
+
             <div class="col-md-4">
-                <div class="card">
+                <div class="card shadow-sm h-80">
                     <div class="card-body">
-                        <h5 class="card-title">Altri approfondimenti</h5>
-                        <!-- Link ad altre pagine -->
+                        <h5 class="card-title">Principali cause dei conflitti</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex align-items-center">
+                                <span class="badge bg-danger me-2">1</span>
+                                Disuguaglianze economiche e sociali
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <span class="badge bg-primary me-2">2</span>
+                                Lotta per le risorse naturali
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <span class="badge bg-warning me-2">3</span>
+                                Nazionalismo e potere autoritario
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <span class="badge bg-success me-2">4</span>
+                                Crisi ambientali
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
+        <div class="row">
+            <div class="col-md-15">
+                <div class="row mb-4">
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title text-danger"><i
+                                        class="bi bi-currency-exchange me-2"></i>Disuguaglianze economiche</h5>
+                                <p class="card-text">Povertà diffusa e ingiustizia accrescono risentimenti e tensioni
+                                    sociali che possono sfociare in conflitti</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary"><i class="bi bi-droplet me-2"></i>Lotta per le
+                                    risorse</h5>
+                                <p class="card-text">Petrolio, acqua, minerali preziosi (come il coltan in Congo) e
+                                    giacimenti energetici sono spesso al centro di conflitti</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title text-warning"><i class="bi bi-flag me-2"></i>Nazionalismo</h5>
+                                <p class="card-text">Ideologie estremiste, leadership oppressive e ambizioni
+                                    territoriali spingono allo scontro tra nazioni e gruppi etnici</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title text-success"><i class="bi bi-cloud-sun me-2"></i>Crisi ambientali
+                                </h5>
+                                <p class="card-text">Siccità e cambiamenti climatici aggravano la scarsità di terra e
+                                    acqua, favorendo migrazioni forzate e conflitti</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="mt-4">Casi storici emblematici</h2>
+
+                <div class="accordion mb-4" id="accordionEsempi">
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne">
+                                Genocidio del Ruanda (1994)
+                            </button>
+                        </h3>
+                        <div id="collapseOne" class="accordion-collapse collapse show"
+                            data-bs-parent="#accordionEsempi">
+                            <div class="accordion-body">
+                                Alimentato da tensioni etniche ereditate dal colonialismo, con un bilancio di circa
+                                800.000 morti in soli 100 giorni.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo">
+                                Conflitti nei Balcani (anni '90)
+                            </button>
+                        </h3>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionEsempi">
+                            <div class="accordion-body">
+                                Nacquero dal nazionalismo e dalla frammentazione della Jugoslavia, con pulizie etniche e
+                                crimini di guerra.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseThree">
+                                Guerra in Siria (dal 2011)
+                            </button>
+                        </h3>
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionEsempi">
+                            <div class="accordion-body">
+                                Scaturita da proteste contro un regime autoritario in un contesto di povertà e siccità,
+                                evoluta in complesso conflitto internazionale.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFour">
+                                Guerra in Ucraina (dal 2022)
+                            </button>
+                        </h3>
+                        <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionEsempi">
+                            <div class="accordion-body">
+                                Conflitto con radici in complesse dinamiche geopolitiche, nazionalismo e questioni di
+                                sicurezza internazionale.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <p>In tutti i casi è evidente l'interconnessione tra cause politiche, economiche e sociali, che
+                        rende difficile prevedere una soluzione senza affrontare le radici profonde del conflitto.</p>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer class="py-3 mt-4 text-bg-dark">
         <p class="text-center text-light-dark">© 2025 Itis da Vinci, Inc</p>
     </footer>
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
         crossorigin="anonymous"></script>

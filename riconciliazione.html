@@ -3,11 +3,34 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Storie di guerra e rincociliazione</title>
-    <meta charset="UTF-8">
+    <title>Storie di guerra e riconciliazione</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <style>
+        .hero-image {
+            height: 400px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .quote {
+            font-style: italic;
+            border-left: 3px solid #0d6efd;
+            padding-left: 15px;
+            margin: 20px 0;
+        }
+
+        .author {
+            font-weight: bold;
+            text-align: right;
+        }
+    </style>
 </head>
 
 <body>
@@ -34,7 +57,6 @@
                     <li><a href="costruire-pace.html" class="nav-link px-2 text-white">Costruire Pace</a></li>
                 </ul>
 
-
                 <div class="text-end position-relative">
                     <button type="button" class="btn btn-outline-light me-2" id="loginToggle">Login</button>
                     <button type="button" class="btn btn-warning" id="signupBtn">Sign-up</button>
@@ -50,8 +72,7 @@
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" class="form-control" id="password" placeholder="Password">
                             </div>
-                            <p id="erroreLogin" class="text-danger mt-2" style="display: none;">Email o password errati.
-                            </p>
+                            <p id="erroreLogin" class="text-danger mt-2" style="display: none;">Email o password errati.</p>
                             <button type="submit" class="btn btn-primary w-100">Login</button>
                         </form>
                     </div>
@@ -77,23 +98,62 @@
                             d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
                     </svg>
                 </div>
+            </div>
+        </div>
     </header>
 
     <div class="container" style="margin: 7em auto 3em;">
-        <h1 class="display-3">Riconciliazione</h1>
-        <img src="./images/riconciliazione.jpg" class="img-fluid mb-4 w-75" alt="Le radici della guerra">
+        <h1 class="display-3 mb-4">Storie di riconciliazione</h1>
+        <p class="lead">Dietro ogni guerra ci sono storie personali di dolore ma anche (in alcuni casi) di speranza e riconciliazione.</p>
+        
+        <img src="images/rinconciliazione_soldati.png" class="img-fluid mb-4 rounded hero-image" alt="Processi di riconciliazione post-bellica">
 
         <div class="row">
             <div class="col-md-8">
-                <h2>Approfondimento</h2>
-                <p>Qui puoi inserire il contenuto dettagliato sull'argomento...</p>
-                <!-- Contenuto esteso -->
+                
+                <div class="mb-5">
+                    <h3>Repubblica Democratica del Congo</h3>
+                    <p>Dopo il conflitto, comunità un tempo nemiche cercano di ricostruire la convivenza. Un esempio significativo viene dalla Repubblica Democratica del Congo: nel campo profughi di Mukondo rifugiati delle comunità Luba e Twa, uscite vincitrici da anni di violenze, vivono oggi insieme in pace.</p>
+                    <div class="quote">
+                        "La riconciliazione non è un evento, ma un processo che richiede tempo e impegno costante"
+                        <div class="author">- Anonimo, sopravvissuto al conflitto</div>
+                    </div>
+                </div>
+                
+                <div class="mb-5">
+                    <h3>Sudafrica e la Commissione per la Verità</h3>
+                    <p>Nei casi di riconciliazione post-bellica, è fondamentale affrontare il passato doloroso per costruire fiducia. La Commissione per la Verità e Riconciliazione in Sudafrica (1994-2002) guidata da Desmond Tutu è un esempio emblematico.</p>
+                    <div class="quote">
+                        «Non abbiamo negato il nostro passato, abbiamo guardato la bestia negli occhi»
+                        <div class="author">- Desmond Tutu</div>
+                    </div>
+                    <p>La commissione promosse il dialogo tra vittime ed ex carnefici, creando uno spazio per la verità e il perdono.</p>
+                </div>
+                
+                <div class="mb-5">
+                    <h3>Ruanda dopo il genocidio</h3>
+                    <p>Anche in Ruanda, dopo il genocidio del 1994, si è cercato di avviare processi di giustizia (tribunali gacaca) e programmi comunitari per aiutare vittime e responsabili a convivere.</p>
+                    <p>Questi tribunali tradizionali hanno permesso alla comunità di affrontare i crimini commessi in modo partecipativo, combinando giustizia e riconciliazione.</p>
+                </div>
+                
+                <div class="mb-5">
+                    <h3>Altri esempi nel mondo</h3>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Peace and Reconciliation Conferences nei Balcani dopo le guerre degli anni '90</li>
+                        <li class="list-group-item">Incontri tra vittime israeliane e palestinesi per una pacificazione civile</li>
+                        <li class="list-group-item">Programmi di dialogo in Irlanda del Nord dopo il conflitto</li>
+                    </ul>
+                    <p>In generale, questi percorsi dimostrano che pur nella tragedia la volontà di perdonare e dialogare può portare a soluzioni di convivenza pacifica.</p>
+                </div>
             </div>
+
+            <!-- sistemare l'immagine-->
             <div class="col-md-4">
-                <div class="card">
+                <div class="card mb-4 " style="top: 13rem;">
+                    <img src="images/desmond_tutu.jpg" class="card-img-top" alt="Desmond Tutu">
                     <div class="card-body">
-                        <h5 class="card-title">Altri approfondimenti</h5>
-                        <!-- Link ad altre pagine -->
+                        <h5 class="card-title">Desmond Tutu</h5>
+                        <p class="card-text">Arcivescovo e attivista sudafricano, premio Nobel per la pace e guida del processo di riconciliazione in Sudafrica.</p>
                     </div>
                 </div>
             </div>
@@ -101,13 +161,25 @@
     </div>
 
     <footer class="py-3 mt-4 text-bg-dark">
-        <p class="text-center text-light-dark">© 2025 Itis da Vinci, Inc</p>
+        <div class="container">
+            <p class="text-center text-light-dark mb-0">© 2025 Itis da Vinci, Inc</p>
+        </div>
     </footer>
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
         crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('loginToggle').addEventListener('click', function () {
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('signupForm').style.display = 'none';
+        });
+
+        document.getElementById('signupBtn').addEventListener('click', function () {
+            document.getElementById('signupForm').style.display = 'block';
+            document.getElementById('loginForm').style.display = 'none';
+        });
+    </script>
 </body>
 
 </html>
