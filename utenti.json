@@ -1,0 +1,14 @@
+[
+    {
+        "email": "Mario.Rossi@gmail.com",
+        "password": "admin"
+    },
+    {
+        "email": "Cloud.Strife@gmail.com",
+        "password": "sephiroth"
+    },
+    {
+        "email": "giuseppe.verdi@gmail.com",
+        "password": "admin2"
+    }
+]
