@@ -18,10 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let listaAccount;
     async function leggiJson() {
         let risposta = await fetch('./utenti.json');
-        console.log(risposta);
 
         let dati = await risposta.json();
-        console.log(dati);
 
         listaAccount = dati;
     };

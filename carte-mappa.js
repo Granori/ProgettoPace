@@ -78,12 +78,16 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         clickPrecedente() {
-            this.focus = (this.focus === 0) ? this.carte.length - 1 : this.focus - 1;
+            if (this.focus == 0) this.focus = this.carte.length - 1;
+            else this.focus--;
+
             this.generaCards();
         }
 
         clickSuccessivo() {
-            this.focus = (this.focus === this.carte.length - 1) ? 0 : this.focus + 1;
+            if (this.focus == this.carte.length - 1) this.focus = 0;
+            else this.focus++;
+
             this.generaCards();
         }
 
@@ -94,17 +98,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 let carta = this.carte[indice];
 
                 let c = new Carta(carta[0], carta[1], carta[2], carta[3]);
-                let cardElement = c.creaCarta(i === 0);
+                let cartaGrafica = c.creaCarta(i == 0);
 
-                if (i === -1) {
-                    cardElement.classList.add('slide-in-left');
-                } else if (i === 1) {
-                    cardElement.classList.add('slide-in-right');
+                if (i == -1) {
+                    cartaGrafica.classList.add('slide-in-left');
+                } else if (i == 1) {
+                    cartaGrafica.classList.add('slide-in-right');
                 } else {
-                    cardElement.classList.add('fade-in');
+                    cartaGrafica.classList.add('fade-in');
                 }
 
-                this.contenitore.appendChild(cardElement);
+                this.contenitore.appendChild(cartaGrafica);
             }
         }
 
@@ -133,10 +137,6 @@ document.addEventListener('DOMContentLoaded', function () {
             this.chart.draw(this.data, this.options);
         }
 
-        esiste(dato) {
-            return this.datiElaborati.some(d => d[0] === dato[0]);
-        }
-
         caricaData() {
             this.data = new google.visualization.DataTable();
             this.data.addColumn('string', 'Stato');
@@ -145,27 +145,51 @@ document.addEventListener('DOMContentLoaded', function () {
             this.data.addRows(this.datiElaborati);
         }
 
+        esiste(dato) {
+            let presente = false;
+            for (let i = 0; i < this.datiElaborati.length; i++) {
+                if (this.datiElaborati[i][0] == dato[0]) {
+                    presente = true;
+                    break;
+                }
+            }
+
+            return presente;
+        }
+
         elaboraDati() {
             for (let i = 0; i < this.datiGrezzi.length; i++) {
                 if (this.esiste(this.datiGrezzi[i])) continue;
 
-                let stessoStato = this.datiGrezzi
-                    .map((val, j) => [j, val])
-                    .filter(([_, val]) => val[0] === this.datiGrezzi[i][0])
-                    .sort((a, b) => b[1][1][1] - a[1][1][1])
-                    .map(([j, _]) => j);
+                let stessoStato = [];
+                // Cerco se ci sono più guerre nello stesso stato
+                for (let j = 0; j < this.datiGrezzi.length; j++)  {
+                    if (this.datiGrezzi[j][0] == this.datiGrezzi[i][0]) stessoStato.push(j);
+                }
+                // Ordino la lista in modo decrescente (dal più recente al più vecchio)
+                stessoStato.sort((a, b) => this.datiGrezzi[b][1][1] - this.datiGrezzi[a][1][1]);
 
-                let dato = [this.datiGrezzi[i][0], this.datiGrezzi[stessoStato[0]][1][1]];
+                let dato = [];
+                // Aggiungo lo stato
+                dato.push(this.datiGrezzi[i][0]);
+                // Aggiungo la data della guerra più recente
+                dato.push(this.datiGrezzi[stessoStato[0]][1][1]);
 
-                let nota = stessoStato.map(indice => {
-                    const [inizio, fine] = this.datiGrezzi[indice][1];
-                    const desc = this.datiGrezzi[indice][2];
-                    return `(${inizio} - ${fine}) ${fine === 2025 ? "Attualmente in corso" : "Finita"} - ${desc}`;
-                }).join("\n");
-
+                let nota = "";
+                // Aggiungo nella nota dello stato tutte le guerre a cui ha partecipato partendo da quella più recente
+                for (let j = 0; j < stessoStato.length; j++) {
+                    if (j != 0) nota += "\n";
+                    if (this.datiGrezzi[stessoStato[j]][1][1] == 2025) {
+                        nota += `(${this.datiGrezzi[stessoStato[j]][1][0]} - ${this.datiGrezzi[stessoStato[j]][1][1]}) Attualmente in corso - ${this.datiGrezzi[stessoStato[j]][2]}`;
+                    }
+                    else {
+                        nota += `(${this.datiGrezzi[stessoStato[j]][1][0]} - ${this.datiGrezzi[stessoStato[j]][1][1]}) Finita - ${this.datiGrezzi[stessoStato[j]][2]}`;
+                    } 
+                };
                 dato.push(nota);
+
                 this.datiElaborati.push(dato);
-            }
+            };
         }
     }
 
