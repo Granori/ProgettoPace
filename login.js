@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.addEventListener('click', (e) => {
-        if (!loginForm.contains(e.target) && e.target !== SignupBtn) {
+        if (!singupForm.contains(e.target) && e.target !== SignupBtn) {
             singupForm.style.display = 'none';
         }
     });
